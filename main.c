@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
+#define NAME_CHAR_LIMIT 50
 
 // reads user's grade percentage for a certain subject
 
@@ -47,10 +50,50 @@ int input_subject_amount()
     }
 }
 
+// reads user's full name
+
+char *input_name()
+{
+    while (1)
+    {
+        char name[NAME_CHAR_LIMIT];
+        printf("Enter your name (MAX 50 characters): ");
+        fgets(name, sizeof(name), stdin);
+        name[strcspn(name, "\n")] = '\0';
+
+        int len = strlen(name);
+
+        if (len > NAME_CHAR_LIMIT)
+        {
+            printf("Name longer than 50 characters, please use initials instead.");
+            continue;
+        }
+
+        else
+        {
+            char *name_copy = (char *)malloc((len + 1) * sizeof(char));
+
+            if (name_copy != NULL)
+            {
+                strcpy(name_copy, name);
+                return name_copy;
+            }
+
+            else
+            {
+                printf("Memory allocation failed. Please try again.\n");
+                return NULL;
+            }
+        }
+    }
+}
 
 int main() {
 
+    char *name = input_name();
+
     printf("Welcome to the Student Grade Calculator!\n");
 
+    free(name);
     return 0;
 }
