@@ -24,6 +24,29 @@ int input_grade_percentage(const char* subject)
     }
 }
 
+// reads from user the amount of subjects to grade
+
+int input_subject_amount()
+{
+    int amount = 0;
+
+    while (1)
+    {
+        printf("\nEnter amount of subjects to grade: ");
+
+        if (scanf("%d", &amount) != 1)
+        {
+            printf("Incorrect input. Please type an integer.\n");
+            while(getchar() != '\n');
+        }
+
+        else
+        {
+            return amount;
+        }
+    }
+}
+
 
 int main() {
 
