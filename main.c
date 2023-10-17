@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define NAME_CHAR_LIMIT 50
+#define NAME_SUBJECT_CHAR_LIMIT 50
 
 // reads user's grade percentage for a certain subject
 
@@ -96,14 +96,14 @@ char *input_name()
 {
     while (1)
     {
-        char name[NAME_CHAR_LIMIT];
+        char name[NAME_SUBJECT_CHAR_LIMIT];
         printf("\nEnter your name (MAX 50 characters): ");
         fgets(name, sizeof(name), stdin);
         name[strcspn(name, "\n")] = '\0';
 
         int len = strlen(name);
 
-        if (len > NAME_CHAR_LIMIT)
+        if (len > NAME_SUBJECT_CHAR_LIMIT)
         {
             printf("Name longer than 50 characters, please use initials instead.");
             continue;
@@ -134,7 +134,7 @@ char *input_subject(int subject_number)
 {
     while (1)
     {
-        char subject[NAME_CHAR_LIMIT];
+        char subject[NAME_SUBJECT_CHAR_LIMIT];
 
         // clearing the input buffer
         int c;
@@ -146,7 +146,7 @@ char *input_subject(int subject_number)
 
         int len = strlen(subject);
 
-        if (len > NAME_CHAR_LIMIT)
+        if (len > NAME_SUBJECT_CHAR_LIMIT)
         {
             printf("Subject name is longer than 50 characters, shorten it.");
             continue;
