@@ -130,9 +130,16 @@ char *input_name()
 
 int main() {
 
+    printf("Welcome to the Student Grade Calculator!\n");
+
     char *name = input_name();
 
-    printf("Welcome to the Student Grade Calculator!\n");
+    int subject_amount = input_subject_amount();
+
+    // making arrays of subjects, their percentages and grades
+    char subjects[subject_amount];
+    int subjects_percentage[subject_amount];
+    int subjects_grade[subject_amount];
 
     free(name);
     return 0;
