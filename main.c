@@ -33,6 +33,40 @@ int input_grade_percentage(const char* subject)
     }
 }
 
+// determining grade from percentage
+
+int grade(int percentage)
+{
+    int grade = 0;
+
+    if (percentage >= 90)
+    {
+        grade = 5;
+    }
+    else if (percentage >= 80)
+    {
+        grade = 4;
+    }
+    else if (percentage >= 70)
+    {
+        grade = 3;
+    }
+    else if (percentage >= 60)
+    {
+        grade = 2;
+    }
+    else if (percentage >= 50)
+    {
+        grade = 1;
+    }
+    else
+    {
+        grade = 0;
+    }
+
+    return grade;
+}
+
 // reads from user the amount of subjects to grade
 
 int input_subject_amount()
