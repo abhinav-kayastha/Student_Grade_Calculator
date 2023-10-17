@@ -97,7 +97,7 @@ char *input_name()
     while (1)
     {
         char name[NAME_CHAR_LIMIT];
-        printf("Enter your name (MAX 50 characters): ");
+        printf("\nEnter your name (MAX 50 characters): ");
         fgets(name, sizeof(name), stdin);
         name[strcspn(name, "\n")] = '\0';
 
@@ -128,6 +128,49 @@ char *input_name()
     }
 }
 
+// reads user's subject
+
+char *input_subject(int subject_number)
+{
+    while (1)
+    {
+        char subject[NAME_CHAR_LIMIT];
+
+        // clearing the input buffer
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+
+        printf("Enter subject %d name (MAX 50 characters): ", subject_number);
+        fgets(subject, sizeof(subject), stdin);
+        subject[strcspn(subject, "\n")] = '\0';
+
+        int len = strlen(subject);
+
+        if (len > NAME_CHAR_LIMIT)
+        {
+            printf("Subject name is longer than 50 characters, shorten it.");
+            continue;
+        }
+
+        else
+        {
+            char *subject_copy = (char *)malloc((len + 1) * sizeof(char));
+
+            if (subject_copy != NULL)
+            {
+                strcpy(subject_copy, subject);
+                return subject_copy;
+            }
+
+            else
+            {
+                printf("Memory allocation failed. Please try again.\n");
+                return NULL;
+            }
+        }
+    }
+}
+
 int main() {
 
     printf("Welcome to the Student Grade Calculator!\n");
@@ -137,10 +180,31 @@ int main() {
     int subject_amount = input_subject_amount();
 
     // making arrays of subjects, their percentages and grades
-    char subjects[subject_amount];
+    char **subjects= (char **) malloc(subject_amount * sizeof(char *)); // allocate memory for an array of strings
     int subjects_percentage[subject_amount];
     int subjects_grade[subject_amount];
 
+    for (int i = 0; i < subject_amount; i++)
+    {
+        subjects[i] = input_subject(i + 1);
+        subjects_percentage[i] = input_grade_percentage(subjects[i]);
+        subjects_grade[i] = grade(subjects_percentage[i]);
+    }
+
+    for (int j = 0; j < subject_amount; j++) {
+        printf("Subject %d: %s\n", j + 1, subjects[j]);
+        printf("Percentage: %d\n", subjects_percentage[j]);
+        printf("Grade: %d\n", subjects_grade[j]);
+        printf("\n");
+    }
+
     free(name);
+
+    for (int i = 0; i < subject_amount; i++)
+    {
+        free(subjects[i]); // freeing memory for each element of array
+    }
+
+    free(subjects); // freeing memory for whole array
     return 0;
 }
