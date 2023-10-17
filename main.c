@@ -22,9 +22,22 @@ int input_grade_percentage(const char* subject)
 
         else
         {
+            if (grade_percentage < 0 || grade_percentage > 100)
+            {
+                printf("Grade percentage needs to between 0 and 100, try again.\n");
+                continue;
+            }
+
             return grade_percentage;
         }
     }
+}
+
+// returns grade from 0-5
+
+int grade(int percentage)
+{
+    if (percentage > )
 }
 
 // reads from user the amount of subjects to grade
