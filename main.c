@@ -194,7 +194,7 @@ int main() {
         total += subjects_grade[i];
     }
 
-    float avg = total/subject_amount;
+    float avg = (float)total/(float)subject_amount;
 
     printf("\n-----------------------------------------------");
     printf("\nStudent: %s\n", name);
