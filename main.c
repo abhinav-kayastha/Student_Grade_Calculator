@@ -194,22 +194,22 @@ int main() {
         total += subjects_grade[i];
     }
 
-    float avg = (float)total/(float)subject_amount;
+    float avg = (float)total/(float)subject_amount; // calculates gpa, num. and denom. converted to float
 
     printf("\n-----------------------------------------------");
     printf("\nStudent: %s\n", name);
-    printf("------------------------------------------------");
+    printf("-----------------------------------------------");
     printf("\n%-30sScore\tGrade\n", "Subjects");
-    printf("------------------------------------------------\n");
+    printf("-----------------------------------------------\n");
 
     for (int j = 0; j < subject_amount; j++)
     {
         printf("%-32s%d%%\t%5d\n", subjects[j], subjects_percentage[j], subjects_grade[j]);
     }
 
-    printf("------------------------------------------------");
-    printf("\nAverage Grade: %.2f", avg);
-    printf("\n------------------------------------------------");
+    printf("-----------------------------------------------\n");
+    printf("Average Grade: %.2f\n", avg);
+    printf("-----------------------------------------------\n");
 
     free(name);
 
