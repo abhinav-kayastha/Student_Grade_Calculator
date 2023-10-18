@@ -140,7 +140,7 @@ char *input_subject(int subject_number)
         int c;
         while ((c = getchar()) != '\n' && c != EOF);
 
-        printf("Enter subject %d name (MAX 50 characters): ", subject_number);
+        printf("\nEnter subject %d name (MAX 50 characters): ", subject_number);
         fgets(subject, sizeof(subject), stdin);
         subject[strcspn(subject, "\n")] = '\0';
 
@@ -179,6 +179,8 @@ int main() {
 
     int subject_amount = input_subject_amount();
 
+    int total = 0;
+
     // making arrays of subjects, their percentages and grades
     char **subjects= (char **) malloc(subject_amount * sizeof(char *)); // allocate memory for an array of strings
     int subjects_percentage[subject_amount];
@@ -189,14 +191,25 @@ int main() {
         subjects[i] = input_subject(i + 1);
         subjects_percentage[i] = input_grade_percentage(subjects[i]);
         subjects_grade[i] = grade(subjects_percentage[i]);
+        total += subjects_grade[i];
     }
 
-    for (int j = 0; j < subject_amount; j++) {
-        printf("Subject %d: %s\n", j + 1, subjects[j]);
-        printf("Percentage: %d\n", subjects_percentage[j]);
-        printf("Grade: %d\n", subjects_grade[j]);
-        printf("\n");
+    float avg = total/subject_amount;
+
+    printf("\n-----------------------------------------------");
+    printf("\nStudent: %s\n", name);
+    printf("------------------------------------------------");
+    printf("\n%-30sScore\tGrade\n", "Subjects");
+    printf("------------------------------------------------\n");
+
+    for (int j = 0; j < subject_amount; j++)
+    {
+        printf("%-32s%d%%\t%5d\n", subjects[j], subjects_percentage[j], subjects_grade[j]);
     }
+
+    printf("------------------------------------------------");
+    printf("\nAverage Grade: %.2f", avg);
+    printf("\n------------------------------------------------");
 
     free(name);
 
