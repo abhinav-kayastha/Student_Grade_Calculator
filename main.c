@@ -12,7 +12,7 @@ int input_grade_percentage(const char* subject)
 
     while (1)
     {
-        printf("\nEnter your grade for %s (0 - 100): ", subject);
+        printf("\nEnter your score for %s (0 - 100): ", subject);
 
         if (scanf("%d", &grade_percentage) != 1)
         {
@@ -175,6 +175,14 @@ int main() {
 
     printf("Welcome to the Student Grade Calculator!\n");
 
+    FILE *file = fopen("student_report.txt", "w"); // txt file located in cmake-build-debug directory
+
+    if (file == NULL)
+    {
+        printf("Error opening the file for writing. Try changing the file name.\n");
+        return 1;
+    }
+
     char *name = input_name();
 
     int subject_amount = input_subject_amount();
@@ -210,6 +218,23 @@ int main() {
     printf("-----------------------------------------------\n");
     printf("Average Grade: %.2f\n", avg);
     printf("-----------------------------------------------\n");
+
+    // printing the report to the file
+    fprintf(file, "-----------------------------------------------\n");
+    fprintf(file, "Student: %s\n", name);
+    fprintf(file, "-----------------------------------------------\n");
+    fprintf(file, "%-30sScore\tGrade\n", "Subjects");
+    fprintf(file, "-----------------------------------------------\n");
+
+    for (int j = 0; j < subject_amount; j++) {
+        fprintf(file, "%-32s%d%%\t%5d\n", subjects[j], subjects_percentage[j], subjects_grade[j]);
+    }
+
+    fprintf(file, "-----------------------------------------------\n");
+    fprintf(file, "Average Grade: %.2f\n", avg);
+    fprintf(file, "-----------------------------------------------\n");
+
+    fclose(file);
 
     free(name);
 
